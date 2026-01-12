@@ -1,0 +1,70 @@
+* , *::before, *::after { box-sizing: border-box;
+margin: 0;
+padding: 0; }
+html, body {
+  height: 100%;
+ width: 100%;
+  font-family: Inter, system-ui, sans-serif;
+  color: black;
+}
+.main{
+  height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+padding: 5rem 0px;
+}
+.card{
+  width: 20rem;
+  height: 30rem;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  position: relative;
+}
+.card img{
+  width: 100%;
+  height: 50%;
+  object-fit: contain;
+}
+.content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+button{
+  padding: 1rem 2rem;
+  background-color: greenyellow;
+  border: none;
+  font-size: 1.5rem;
+
+}
+button:active{
+  transform: scale(0.98);
+}
+.battle-ground{
+  display: flex;
+  gap: 10rem;
+}
+.btngroup{
+  display: flex;
+ 
+  gap: 10rem;
+}
+#fightbtn{
+  background-color: rgb(240, 59, 59);
+}
+.Winsdisplay{
+  position: absolute;
+  display: none;
+  z-index: 10;
+background-color: yellowgreen;
+padding: 1rem 2rem;
+top: 10rem;
+border: lavenderblush 2px solid;
+}
