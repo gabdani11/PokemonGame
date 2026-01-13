@@ -1,44 +1,97 @@
 import React from 'react'
-import pokemonCards from './components/Data.js';
+
 import { useState } from "react";
 import Card from "./components/Card.jsx";
-
+import winsound from './assets/pokemon-win.mp3'
 const App = () => {
-  const [index, setIndex] = useState(0);
-  const [index0, setIndex0] = useState(0);
+  const audio = new Audio(winsound);
+  const [pokemonData, setPokemonData] = useState({
+    name: "Select your Pokemon",
+    sprites: { front_default: "https://archives.bulbagarden.net/media/upload/thumb/3/3f/0143Snorlax.png/800px-0143Snorlax.png" },
+    types: [{ type: { name: "none" } }],
+    stats: [{ base_stat: 0 }, { base_stat: 0 }, { base_stat: 0 }],
+  });
+  const [pokemonData2, setPokemonData2] = useState({
+    name: "Select your Pokemon",
+    sprites: { front_default: "https://archives.bulbagarden.net/media/upload/thumb/3/3f/0143Snorlax.png/800px-0143Snorlax.png" },
+    types: [{ type: { name: "none" } }],
+    stats: [{ base_stat: 0 }, { base_stat: 0 }, { base_stat: 0 }],
+  });
+ 
+async function fecthData(num){
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}`)
+  const data = await response.json();
+  return data;
+}
+async function fetchAndLog(num){
+  const pokemonData = await fecthData(num);
+  setPokemonData(pokemonData);
+}
+async function fetchAndLog2(num){
+  const pokemonData = await fecthData(num);
+  setPokemonData2(pokemonData);
+}
 
-  function randomNumber0() {
-    const num = Math.floor(Math.random() * 20);
-    setIndex0(num);
-  }
   function randomNumber() {
-    const num = Math.floor(Math.random() * 20);
-    setIndex(num);
+    const num = Math.floor(Math.random() * 1025);
+    fetchAndLog(num);
+  }
+  function randomNumber2() {
+    const num = Math.floor(Math.random() * 1025);
+    fetchAndLog2(num);
   }
 function battle(){
-  let leftside=pokemonCards[index0];
-  let rightside=pokemonCards[index];
-  let leftPower=leftside.attack + leftside.defence + leftside.health;
-  let rightPower=rightside.attack + rightside.defence + rightside.health;
+  
+  audio.play();
+  let leftside=pokemonData;
+  let rightside=pokemonData2;
+  let leftPower=leftside.stats[0].base_stat + leftside.stats[1].base_stat + leftside.stats[2].base_stat;
+  let rightPower=rightside.stats[0].base_stat + rightside.stats[1].base_stat + rightside.stats[2].base_stat;
+  setTimeout(()=>{
   if(leftPower>rightPower){
-    alert(`${leftside.pokemonName} Wins!🎉`)
+    document.querySelector('.winDisplay').style.display="block"
+    document.querySelector('.winDisplay').innerText=`winner is ${leftside.name}`
+    
+    
+    setTimeout(() => {
+      document.querySelector('.winDisplay').style.display="none"
+      audio.pause();
+      audio.currentTime = 0;
+      
+    }, 3000);
+    
+    
+
   }else if(rightPower>leftPower){
-    alert(`${rightside.pokemonName} Wins!🎉`)
+    document.querySelector('.winDisplay').style.display="block"
+    document.querySelector('.winDisplay').innerText=`winner is ${rightside.name}`
+    
+    setTimeout(() => {
+      document.querySelector('.winDisplay').style.display="none"
+      audio.pause();
+      audio.currentTime = 0;
+    }, 3000);
   }else{
-    alert("It's a Tie!")
+    document.querySelector('.winDisplay').style.display="block"
+    document.querySelector('.winDisplay').innerText="It's a Tie!"
+    setTimeout(() => {
+      document.querySelector('.winDisplay').style.display="none"
+    }, 3000);
   }
+},1000);
 }
   return (
     <div className="main">
       <h1>Pokemon Cards Game</h1>
       <div className='battle-ground'>
-      <Card index={index0} />
-      <Card index={index} />
+        <div className='winDisplay'>winner</div>
+      <Card index={pokemonData} />
+      <Card index={pokemonData2} />
       </div>
       <div className='btngroup'>
-      <button onClick={randomNumber0}>Select your Pokemon</button>
-      <button id='fightbtn' onClick={battle}>Battle</button>
       <button onClick={randomNumber}>Select your Pokemon</button>
+      <button id='fightbtn' onClick={battle}>Battle</button>
+      <button onClick={randomNumber2}>Select your Pokemon</button>
       </div>
     </div>
   );
