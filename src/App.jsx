@@ -6,16 +6,16 @@ import winsound from './assets/pokemon-win.mp3'
 const App = () => {
   const audio = new Audio(winsound);
   const [pokemonData, setPokemonData] = useState({
-    name: "Select your Pokemon",
+    name: "Uknown",
     sprites: { front_default: "https://archives.bulbagarden.net/media/upload/thumb/3/3f/0143Snorlax.png/800px-0143Snorlax.png" },
     types: [{ type: { name: "none" } }],
-    stats: [{ base_stat: 0 }, { base_stat: 0 }, { base_stat: 0 }],
+    stats: [{},{ base_stat: 0 }, { base_stat: 0 }, { base_stat: 0 }],
   });
   const [pokemonData2, setPokemonData2] = useState({
-    name: "Select your Pokemon",
+    name: "Uknown",
     sprites: { front_default: "https://archives.bulbagarden.net/media/upload/thumb/3/3f/0143Snorlax.png/800px-0143Snorlax.png" },
     types: [{ type: { name: "none" } }],
-    stats: [{ base_stat: 0 }, { base_stat: 0 }, { base_stat: 0 }],
+    stats: [{},{ base_stat: 0 }, { base_stat: 0 }, { base_stat: 0 }],
   });
  
 async function fecthData(num){
@@ -80,13 +80,18 @@ function battle(){
   }
 },1000);
 }
+
   return (
     <div className="main">
       <h1>Pokemon Cards Game</h1>
       <div className='battle-ground'>
         <div className='winDisplay'>winner</div>
-      <Card index={pokemonData} />
+      <div className='card-section'>
+         <Card index={pokemonData} />
+         <div className='vs-div'>VS</div>
       <Card index={pokemonData2} />
+      </div>
+     
       </div>
       <div className='btngroup'>
       <button onClick={randomNumber}>Select your Pokemon</button>
