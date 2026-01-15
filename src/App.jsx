@@ -2,9 +2,10 @@ import React from 'react'
 
 import { useState } from "react";
 import Card from "./components/Card.jsx";
-import winsound from './assets/pokemon-win.mp3'
+
+import click from './assets/clicksound.mp3'
 const App = () => {
-  const audio = new Audio(winsound);
+  
   const [pokemonData, setPokemonData] = useState({
     name: "Uknown",
     sprites: { front_default: "https://archives.bulbagarden.net/media/upload/thumb/3/3f/0143Snorlax.png/800px-0143Snorlax.png" },
@@ -35,14 +36,16 @@ async function fetchAndLog2(num){
   function randomNumber() {
     const num = Math.floor(Math.random() * 1025);
     fetchAndLog(num);
+    new Audio(click).play();
   }
   function randomNumber2() {
     const num = Math.floor(Math.random() * 1025);
     fetchAndLog2(num);
+    new Audio(click).play();
   }
 function battle(){
   
-  audio.play();
+
   let leftside=pokemonData;
   let rightside=pokemonData2;
   let leftPower=leftside.stats[0].base_stat + leftside.stats[1].base_stat + leftside.stats[2].base_stat;
@@ -55,8 +58,7 @@ function battle(){
     
     setTimeout(() => {
       document.querySelector('.winDisplay').style.display="none"
-      audio.pause();
-      audio.currentTime = 0;
+      
       
     }, 3000);
     
@@ -94,9 +96,9 @@ function battle(){
      
       </div>
       <div className='btngroup'>
-      <button onClick={randomNumber}>Select your Pokemon</button>
+      <button onClick={randomNumber}>Choose left Pokemon</button>
       <button id='fightbtn' onClick={battle}>Battle</button>
-      <button onClick={randomNumber2}>Select your Pokemon</button>
+      <button onClick={randomNumber2}>Choose Right Pokemon</button>
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&display=swap');
 * , *::before, *::after { box-sizing: border-box;
 margin: 0;
 padding: 0; }
 html, body {
   height: 100%;
  width: 100%;
-  font-family: Inter, system-ui, sans-serif;
+  /* font-family: Inter, system-ui, sans-serif; */
+   font-family: "Pixelify Sans", sans-serif;
   color: black;
 }
 .main{
@@ -13,10 +15,18 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: space-between;
-padding: 5rem 0px;
-background-size: cover;
+padding: 1rem 0rem;
+background: url(./assets/background.webp);
 background-position: center;
+background-size: cover;
 }
+.main > h1{
+  color: white;
+  font-size: 3rem;
+    font-family: "Press Start 2P", system-ui;
+  text-shadow: 2px 2px 5px black;
+}
+/* CARD_SECTION */
 .card-section{
   display: flex;
   align-items: center;
@@ -25,16 +35,22 @@ background-position: center;
 .vs-div{
   font-size: 5rem;
   font-weight: 700;
+  color: white;
 }
 .card{
   width: 20rem;
   padding: 0.7rem;
-  background-color: yellow;
+  background: radial-gradient(yellow, black, yellow);
   border-radius: 0.5rem;
   position: relative;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
+  
 
 
 }
+
+
+
 .basic-title{
   font-weight: 700;
   font-size: 0.7rem;
@@ -61,6 +77,12 @@ background-position: center;
   justify-content: space-between;
   align-items: center;
 
+}
+.top>h1{
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  padding: 0.3rem 0rem;
 }
 .right-top p{
   font-weight: 600;
@@ -135,4 +157,36 @@ background-position: center;
 }
 .second-row span{
   font-size: 0.5rem;
+}
+/* BUTTON_SECTION */
+
+.btngroup{
+  
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+.btngroup button{
+  padding: 1rem 1rem;
+  font-weight: 900;
+  background-color: green;
+  font-size: 1rem;
+  border: 10px solid goldenrod;
+  border-radius: 20px;
+  box-shadow: inset 2px 2px 5px rgb(8, 8, 8);
+  transition: all 0.3s ease-in-out;
+   font-family: "Pixelify Sans", sans-serif;
+}
+.btngroup button:hover{
+  background-color: limegreen;
+  cursor: pointer;
+  
+}
+#fightbtn:hover{
+  background-color: red;
+}
+.btngroup button:active{
+  transform: scale(0.95);
 }
