@@ -1,5 +1,5 @@
 import React from 'react'
-
+import video from './assets/Background-video.mp4'
 import { useState } from "react";
 import Card from "./components/Card.jsx";
 
@@ -52,8 +52,10 @@ function battle(){
   let rightPower=rightside.stats[0].base_stat + rightside.stats[1].base_stat + rightside.stats[2].base_stat;
   setTimeout(()=>{
   if(leftPower>rightPower){
-    document.querySelector('.winDisplay').style.display="block"
-    document.querySelector('.winDisplay').innerText=`winner is ${leftside.name}`
+    document.querySelector('.winDisplay').style.display="flex"
+    document.querySelector('.winDisplay').innerHTML=`<h3>WINNER🎉</h3>
+          <h4>${leftside.name}</h4>
+          <img src="${leftside.sprites.front_default}" alt="image" />`
     
     
     setTimeout(() => {
@@ -65,17 +67,18 @@ function battle(){
     
 
   }else if(rightPower>leftPower){
-    document.querySelector('.winDisplay').style.display="block"
-    document.querySelector('.winDisplay').innerText=`winner is ${rightside.name}`
+    document.querySelector('.winDisplay').style.display="flex"
+    document.querySelector('.winDisplay').innerHTML=`<h3>WINNER🎉</h3>
+          <h4>${rightside.name}</h4>
+          <img src="${rightside.sprites.front_default}" alt="image" />`
     
     setTimeout(() => {
       document.querySelector('.winDisplay').style.display="none"
-      audio.pause();
-      audio.currentTime = 0;
+      
     }, 3000);
   }else{
-    document.querySelector('.winDisplay').style.display="block"
-    document.querySelector('.winDisplay').innerText="It's a Tie!"
+    document.querySelector('.winDisplay').style.display="flex"
+    document.querySelector('.winDisplay').innerHTML="It's a Tie!"
     setTimeout(() => {
       document.querySelector('.winDisplay').style.display="none"
     }, 3000);
@@ -85,11 +88,15 @@ function battle(){
 
   return (
     <div className="main">
+      <video src={video} autoPlay loop muted></video>
+      <img className='logo' src="pngwing.com.png" alt=" logo" />
       <h1>Pokemon Cards Game</h1>
       <div className='battle-ground'>
-        <div className='winDisplay'>winner</div>
+        <div className='winDisplay'>
+          
+        </div>
       <div className='card-section'>
-         <Card index={pokemonData} />
+         <Card index={pokemonData}  />
          <div className='vs-div'>VS</div>
       <Card index={pokemonData2} />
       </div>
